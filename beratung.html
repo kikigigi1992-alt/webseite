@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1:1 Beratung | Trading meets Nervensystem</title>
+  <meta name="description" content="Zwei fokussierte Sessions zur Lösung akuter Blockaden oder Optimierung deines Trading-Setups aus psychologischer Sicht.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* Icon-Boxen (heller Hintergrund) */
+    .icon-row-box { flex-shrink:0; width:38px; height:38px; min-width:38px; background:#eef2f7; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; color:#1a2d42; }
+    .icon-row-box i { width:20px; height:20px; display:block; }
+    /* Karten-Icon (Für wen) */
+    .card-icon { width:44px; height:44px; background:#eef2f7; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#1a2d42; margin-bottom:14px; }
+    .card-icon i { width:24px; height:24px; display:block; }
+    /* ===== MOBILE FIXES beratung.html ===== */
+    @media(max-width:768px) {
+      /* "Was ist die Beratung" 2-Spalten → untereinander */
+      .two-col-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      /* "Für wen" 3-Spalten → 1 Spalte */
+      .three-col-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    }
+    @media(max-width:600px) {
+      /* Page-Hero Abstand */
+      .page-hero { padding-top: calc(var(--nav-h, 64px) + 32px) !important; padding-bottom: 48px !important; }
+      .page-hero h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+      .page-hero p { font-size: 0.95rem; }
+      /* Buttons untereinander */
+      .page-hero div[style*="display:flex"] { flex-direction: column !important; }
+      .page-hero .btn { width: 100% !important; justify-content: center !important; }
+      /* Zitat-Box auf dunklem Hintergrund */
+      div[style*="border-left:3px"] { padding: 16px !important; }
+      /* Preiskarten */
+      .pricing-card { padding: 24px 20px !important; }
+    }
+  </style>
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="Trading meets Nervensystem by Kristina">
+  <meta property="og:title"       content="1:1 Beratung | Trading meets Nervensystem">
+  <meta property="og:description" content="Zwei fokussierte Sessions zur Lösung akuter Blockaden oder Optimierung deines Trading-Setups aus psychologischer Sicht.">
+  <meta property="og:image"       content="https://tradingmeetsnervensystem.de/Foto_Startseite_oben.jpg">
+  <meta property="og:url"         content="https://tradingmeetsnervensystem.de/beratung.html">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="1:1 Beratung | Trading meets Nervensystem">
+  <meta name="twitter:description" content="Zwei fokussierte Sessions zur Lösung akuter Blockaden oder Optimierung deines Trading-Setups aus psychologischer Sicht.">
+  <meta name="twitter:image"       content="https://tradingmeetsnervensystem.de/Foto_Startseite_oben.jpg"></head>
+<body class="subpage">
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-main">Trading meets Nervensystem</span>
+      <span class="logo-sub">by Kristina</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="beratung.html" class="active">Beratung</a></li>
+      <li><a href="about.html">Über mich</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+    </ul>
+    <a href="https://zeeg.me/kristinagibert/90-minutiges-coaching" target="_blank" rel="noopener" class="btn btn-teal btn-sm nav-cta">Beratung buchen</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Home</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="beratung.html">Beratung</a>
+  <a href="about.html">Über mich</a>
+  <a href="contact.html">Kontakt</a>
+  <a href="mustercheck.html" class="btn btn-teal" style="margin-top:8px;justify-content:center;">0 € Tradingmuster-Check <span class="arrow">→</span></a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <p class="label">1:1 Beratung</p>
+    <h1>Klar. Fokussiert.<br><span class="accent">Wirkungsvoll.</span></h1>
+    <p>Zwei fokussierte Sessions, wenn du Klarheit für eine konkrete Situation brauchst oder emotionale Muster besser einordnen möchtest – ohne langfristiges Commitment.</p>
+    <div style="display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;">
+      <a href="https://zeeg.me/kristinagibert/90-minutiges-coaching" target="_blank" rel="noopener" class="btn btn-teal btn-lg">Beratung buchen <span class="arrow">→</span></a>
+      <a href="about.html" class="btn btn-ghost-white btn-lg">Mehr über mich</a>
+    </div>
+  </div>
+</section>
+
+<!-- WAS IST DIE BERATUNG -->
+<section style="background:var(--white);padding:96px 0;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col-grid">
+      <div class="fade-up">
+        <p class="label">Was ist die 1:1 Beratung?</p>
+        <h2>Zwei Sessions.<br>Direkter Fokus.</h2>
+        <p style="margin:20px 0 16px;">Die 1:1 Beratung ist die richtige Wahl, wenn du eine konkrete Herausforderung lösen oder ein spezifisches Thema aus deinem Trading-Alltag beleuchten möchtest – ohne dich langfristig zu binden.</p>
+        <p style="margin-bottom:16px;">In zwei 90-minütigen Sessions bekommst du neue Impulse und gehst mit konkreten Ansätzen und Orientierung für deinen nächsten Schritt heraus.</p>
+        <div style="background:var(--navy-deeper);border-left:3px solid var(--teal-light);border-radius:var(--radius-sm);padding:20px 24px;margin-bottom:24px;">
+          <p style="color:rgba(255,255,255,0.75);font-style:italic;font-size:0.9rem;line-height:1.7;">"Manchmal braucht man keine wochenlange Begleitung – sondern den richtigen Blick von außen im richtigen Moment."</p>
+          <p style="color:var(--teal-light);font-size:0.75rem;font-weight:600;margin-top:8px;">– Kristina</p>
+        </div>
+        <p style="margin-bottom:0;color:var(--gray-600);font-size:0.9rem;"><strong>Eine einzelne Session reicht meiner Erfahrung nach selten aus. Deshalb biete ich die Beratung bewusst nur als 2er-Paket an – damit sich für dich auch wirklich was bewegt.</strong></p>
+      </div>
+      <div class="fade-up" style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:16px;padding:20px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);">
+          <span class="icon-row-box"><i data-lucide="zap"></i></span>
+          <div><div style="font-weight:700;color:var(--navy-dark);margin-bottom:4px;font-size:0.9rem;">Akute Stressbewältigung</div><div style="font-size:0.84rem;color:var(--gray-600);">Wenn der Markt eskaliert und du einen klaren Kopf brauchst – jetzt.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;padding:20px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);">
+          <span class="icon-row-box"><i data-lucide="scale"></i></span>
+          <div><div style="font-weight:700;color:var(--navy-dark);margin-bottom:4px;font-size:0.9rem;">Sachliche, klare Einordnung</div><div style="font-size:0.84rem;color:var(--gray-600);">Nicht emotional aufgeladen – sondern nüchtern und orientierend.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;padding:20px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);">
+          <span class="icon-row-box"><i data-lucide="eye"></i></span>
+          <div><div style="font-weight:700;color:var(--navy-dark);margin-bottom:4px;font-size:0.9rem;">Stressreaktionen erkennen</div><div style="font-size:0.84rem;color:var(--gray-600);">Ohne sie sofort verändern zu müssen – Verstehen kommt vor Verändern.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;padding:20px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius);">
+          <span class="icon-row-box"><i data-lucide="shield"></i></span>
+          <div><div style="font-weight:700;color:var(--navy-dark);margin-bottom:4px;font-size:0.9rem;">Eine Abwärtsspirale stoppen</div><div style="font-size:0.84rem;color:var(--gray-600);">Bevor sie zur Überzeugung wird: „Ich bin halt so."</div></div>
+        </div>
+        <div style="display:flex;gap:16px;padding:20px;background:var(--teal-pale);border:1px solid rgba(143,174,163,0.35);border-radius:var(--radius);">
+          <span class="icon-row-box"><i data-lucide="unlock"></i></span>
+          <div><div style="font-weight:700;color:var(--navy-dark);margin-bottom:4px;font-size:0.9rem;">Kein Langzeit-Commitment</div><div style="font-size:0.84rem;color:var(--gray-600);">Zwei Sessions – kein langfristiges Commitment und kein aufwändiges Programm.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FÜR WEN -->
+<section style="background:var(--gray-50);padding:80px 0;">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <p class="label">Für wen</p>
+      <h2>Passend für dich, wenn…</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="fade-up three-col-grid">
+      <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:28px;">
+        <div class="card-icon"><i data-lucide="target"></i></div>
+        <h3 style="font-size:1rem;margin-bottom:8px;">Du Klarheit für eine konkrete Situation suchst</h3>
+        <p style="font-size:0.85rem;">und einen gezielten Blick von außen brauchst, um wieder handlungsfähig zu sein.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:28px;">
+        <div class="card-icon"><i data-lucide="trending-down"></i></div>
+        <h3 style="font-size:1rem;margin-bottom:8px;">Du in einem Drawdown feststeckst</h3>
+        <p style="font-size:0.85rem;">und verstehen möchtest, was dich emotional aus der Spur gebracht hat.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:28px;">
+        <div class="card-icon"><i data-lucide="refresh-cw"></i></div>
+        <h3 style="font-size:1rem;margin-bottom:8px;">Du immer wieder dasselbe Muster erkennst</h3>
+        <p style="font-size:0.85rem;">und einen frischen Blick von außen brauchst, damit sich etwas bewegen kann.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREISE -->
+<section class="pricing-section" style="background:linear-gradient(135deg,var(--navy-deeper) 0%,var(--navy-dark) 100%)!important;">
+  <div class="container">
+    <div class="section-header center fade-up">
+      <p class="label">Investition</p>
+      <h2>Mein Beratungsangebot</h2>
+      <p>Direkte Unterstützung, genau dann, wenn du sie brauchst.</p>
+    </div>
+    <div style="max-width:500px;margin:0 auto;" class="fade-up">
+      <div class="pricing-card featured" style="text-align:center;">
+        <h3>Beratungspaket</h3>
+        <div class="pricing-duration">2 × 90 Minuten · online</div>
+        <ul class="pricing-features" style="text-align:left;">
+          <li><span class="check">✓</span> 2 × 90 Minuten Beratung</li>
+          <li><span class="check">✓</span> Beratung zu emotionalen Reaktionen, Verlusten und Blockaden</li>
+          <li><span class="check">✓</span> Nervensystembasierte Perspektive auf deine Situation</li>
+          <li><span class="check">✓</span> Raum für das, was dich gerade wirklich beschäftigt</li>
+          <li><span class="check">✓</span> Persönliche Einordnung statt allgemeiner Ratschläge</li>
+          <li><span class="check">✓</span> Erste Impulse für deine aktuelle Situation</li>
+        </ul>
+        <div style="font-size:2rem;font-weight:800;color:var(--navy-dark);margin:20px 0 20px;">400 EUR</div>
+        <a href="https://zeeg.me/kristinagibert/90-minutiges-coaching" target="_blank" rel="noopener" class="btn btn-teal btn-lg" style="width:100%;justify-content:center;">Beratung buchen <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:28px;font-size:0.875rem;color:rgba(255,255,255,0.4);">Lieber ein längerfristiges Programm? → <a href="coaching.html" style="color:var(--teal-light);">Zum 1:1 Coaching</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header center fade-up"><p class="label">FAQ</p><h2>Häufig gestellte Fragen</h2></div>
+    <div class="faq-list fade-up">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Wie läuft es konkret ab?<span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Du buchst deinen ersten Termin direkt über den Button „Beratung buchen". Den zweiten Termin vereinbaren wir flexibel nach der ersten Session – ganz nach deinem Wunsch und Bedarf, ob in einer Woche, zwei Wochen oder auch später.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Wie unterscheidet sich die Beratung vom Coaching?<span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Die Beratung ist ein fokussiertes 2er-Paket für konkrete, akute Themen – ohne langfristige Begleitung. Das Coaching ist ein mehrwöchiges Programm mit tiefgreifender Arbeit an Mustern, Glaubenssätzen, dem Umgang mit Emotionen und der nachhaltigen Regulierung des Nervensystems. Wer nicht sicher ist, welches Format passt, kann gerne mit mir Kontakt aufnehmen.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Kann ich nach der Beratung ins Coaching wechseln?<span class="faq-icon">+</span></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Ja, absolut. Viele nutzen die Beratung als ersten Schritt, um zu spüren wie die Arbeit mit mir ist. Der Einstieg ins Coaching-Programm ist danach jederzeit möglich.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section style="background:var(--gray-50);padding:96px 0;">
+  <div class="container">
+    <div style="max-width:680px;margin:0 auto;text-align:center;" class="fade-up">
+      <h2 style="color:var(--navy-dark);margin-bottom:20px;">Bereit für einen klaren<br>Blick von außen?</h2>
+      <p style="color:var(--gray-600);font-size:1.05rem;margin-bottom:36px;">Zwei Sessions. Konkrete Impulse. Kein Langzeit-Commitment.</p>
+      <a href="https://zeeg.me/kristinagibert/90-minutiges-coaching" target="_blank" rel="noopener" class="btn btn-teal btn-lg">Beratung buchen <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="padding:32px 0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0;">© 2026 tradingmeetsnervensystem.de · Alle Rechte vorbehalten</p>
+      <div style="display:flex;gap:20px;">
+        <a href="impressum.html" style="font-size:0.8rem;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Impressum</a>
+        <a href="datenschutz.html" style="font-size:0.8rem;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+<script>
+lucide.createIcons();
+</script>
+<script>
+(function() {
+  var track = document.querySelector('.testimonials-track');
+  if (!track) return;
+  var ANIM_S = 50;
+  var resumeTimer = null;
+  var busy = false;
+
+  function tx(el) {
+    var t = window.getComputedStyle(el).transform;
+    if (!t || t === 'none') return 0;
+    var v = t.replace('matrix(','').replace(')','').split(',');
+    return parseFloat(v[4]) || 0;
+  }
+
+  function move(dir) {
+    if (busy) return;
+    busy = true;
+    clearTimeout(resumeTimer);
+    var card = track.querySelector('.testimonial-card');
+    var cw = card ? card.offsetWidth + 24 : 360;
+    var cur = tx(track);
+    var tgt = cur + dir * cw;
+    track.style.transition = 'none';
+    track.style.animation = 'none';
+    track.style.transform = 'translateX(' + cur + 'px)';
+    void track.offsetHeight;
+    track.style.transition = 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)';
+    track.style.transform = 'translateX(' + tgt + 'px)';
+    setTimeout(function() { busy = false; }, 500);
+    resumeTimer = setTimeout(function() { resume(tgt); }, 3500);
+  }
+
+  function resume(frozenX) {
+    var half = track.scrollWidth / 2;
+    var x = frozenX;
+    while (x > 0) x -= half;
+    while (x < -half) x += half;
+    var delay = -Math.round((Math.abs(x) / half) * ANIM_S * 1000);
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(' + x + 'px)';
+    void track.offsetHeight;
+    track.style.transform = '';
+    track.style.animation = 'marquee ' + ANIM_S + 's linear ' + delay + 'ms infinite';
+  }
+
+  var prev = document.querySelector('.t-prev');
+  var next = document.querySelector('.t-next');
+  if (prev) prev.addEventListener('click', function() { move(1); });
+  if (next) next.addEventListener('click', function() { move(-1); });
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+
