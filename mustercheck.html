@@ -1,0 +1,796 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0 € Tradingmuster-Check | Trading meets Nervensystem</title>
+  <meta name="description" content="Finde heraus, welche inneren Muster dein Trading sabotieren – kostenloser Selbsttest mit Sofortauswertung.">
+  <link rel="stylesheet" href="fonts/inter.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== MUSTERCHECK – Tradingmuster-Check ===== */
+    .screen { display:none; min-height:calc(100vh - var(--nav-h, 72px)); }
+    .screen.active { display:flex; flex-direction:column; }
+
+    /* WELCOME */
+    #welcome {
+      background: var(--white);
+      background-image:
+        radial-gradient(ellipse 700px 500px at 90% 0%,  rgba(107,155,141,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 500px 400px at 5% 100%, rgba(107,155,141,0.05) 0%, transparent 65%);
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h, 72px) + 88px) 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .wc { position:relative; z-index:1; max-width:560px; width:100%; margin:0 auto; }
+    .brand-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: block;
+      font-family: 'Inter', sans-serif;
+    }
+    .w-title {
+      font-size: clamp(28px, 7vw, 66px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--navy-deeper);
+      margin-bottom: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    .w-title span { color: var(--navy-dark); display: block; }
+    .w-sub {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin: 28px auto 14px;
+      max-width: 460px;
+      font-family: 'Inter', sans-serif;
+    }
+    .w-meta {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 44px;
+      letter-spacing: 0.5px;
+      font-family: 'Inter', sans-serif;
+    }
+    #welcome .btn-p {
+      display: inline-flex;
+      width: auto;
+      min-width: 220px;
+      padding: 17px 52px;
+      font-size: 16px;
+      border-radius: var(--radius-lg, 12px);
+    }
+
+    /* REG */
+    #reg-screen { background:var(--gray-50); align-items:center; justify-content:center; padding:60px 24px; }
+    .rc { max-width:460px; width:100%; }
+    .reg-icon { width:64px; height:64px; background:var(--teal-pale, rgba(107,155,141,0.12)); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:28px; }
+    .reg-title { font-size:28px; font-weight:700; color:var(--navy-deeper); margin-bottom:12px; text-align:center; letter-spacing:-0.01em; }
+    .reg-sub { font-size:14px; color:var(--gray-600); line-height:1.65; margin-bottom:28px; text-align:center; }
+    .fw { margin-bottom:16px; }
+    .fl { display:block; font-size:11px; font-weight:700; color:var(--navy-dark); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; }
+    .fi { width:100%; padding:15px 18px; background:var(--white); border:1.5px solid var(--gray-200); border-radius:8px; color:var(--navy-dark); font-family:'Inter',sans-serif; font-size:15px; outline:none; transition:border-color 0.2s; box-sizing:border-box; }
+    .fi::placeholder { color:#94a3b8; }
+    .fi:focus { border-color:var(--teal); }
+    .fi.errf { border-color:#dc2626; }
+    .em { font-size:12px; color:#dc2626; margin-top:6px; display:none; }
+    /* Newsletter opt-in card */
+    .newsletter-wrap {
+      display: block;
+      cursor: pointer;
+      border: 1.5px solid rgba(107,155,141,0.25);
+      border-radius: 12px;
+      background: rgba(107,155,141,0.07);
+      margin-bottom: 20px;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .newsletter-wrap:hover {
+      border-color: rgba(107,155,141,0.5);
+      background: rgba(107,155,141,0.12);
+    }
+    .newsletter-wrap:has(input:checked) {
+      border-color: var(--teal-light);
+      background: rgba(107,155,141,0.16);
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .custom-check {
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(107,155,141,0.45);
+      border-radius: 6px;
+      background: transparent;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .checkbox-row input[type="checkbox"]:checked + .custom-check {
+      background: var(--teal-light);
+      border-color: var(--teal-light);
+    }
+    .custom-check svg {
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .checkbox-row input[type="checkbox"]:checked + .custom-check svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .nl-badge {
+      display: block;
+      padding: 16px 20px 0;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .checkbox-content { flex: 1; }
+    .checkbox-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+    .checkbox-content span {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .newsletter-wrap {
+      border-color: var(--navy-dark);
+      background: var(--navy-deeper);
+    }
+    .newsletter-wrap:hover {
+      border-color: var(--teal);
+      background: var(--navy-dark);
+    }
+    .newsletter-wrap:has(input:checked) {
+      border-color: var(--teal-light);
+      background: var(--navy-dark);
+    }
+    .newsletter-wrap .nl-badge { color: var(--teal-light); }
+    .newsletter-wrap .checkbox-content strong { color: var(--white); }
+    .newsletter-wrap .checkbox-content span { color: rgba(255,255,255,0.6); }
+    .custom-check {
+      border-color: rgba(107,155,141,0.5);
+    }
+    .priv-row { margin-top:14px; font-size:12px; color:var(--gray-600); line-height:1.65; }
+    .priv-row a { color:var(--teal); text-decoration:underline; }
+
+    /* SCALE INTRO */
+    #scale-intro { background:var(--gray-50); align-items:center; justify-content:center; padding:60px 24px; }
+    .si { max-width:500px; width:100%; }
+    .si-title { font-size:26px; font-weight:700; color:var(--navy-deeper); margin-bottom:16px; text-align:center; letter-spacing:-0.01em; }
+    .si-sub { font-size:14px; color:var(--gray-600); line-height:1.65; margin-bottom:28px; text-align:center; }
+    .scale-preview { background:var(--white); border:1px solid var(--gray-200); border-radius:12px; padding:20px; margin-bottom:28px; }
+    .sp-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--gray-200); }
+    .sp-row:last-child { border-bottom:none; }
+    .sp-num { font-size:22px; font-weight:800; color:var(--navy-deeper); min-width:32px; }
+    .sp-label { font-size:14px; color:var(--navy-dark); flex:1; padding:0 12px; }
+    .sp-pts { font-size:12px; color:#94a3b8; }
+
+    /* PRIMARY BUTTON */
+    .btn-p { background:var(--teal); color:var(--white); border:none; padding:16px 36px; border-radius:var(--radius, 8px); font-family:'Inter',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; width:100%; display:flex; align-items:center; justify-content:center; }
+    .btn-p:hover { background:var(--teal-light); transform:translateY(-2px); }
+
+    /* QUIZ */
+    #quiz-screen { background:var(--gray-50); }
+    .qh { background:var(--navy-deeper); padding:28px 24px 22px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:var(--nav-h, 72px); z-index:9; }
+    .qbrand { font-size:12px; font-weight:600; color:var(--teal-light); letter-spacing:2px; text-transform:uppercase; }
+    .qprog { font-size:14px; font-weight:600; color:var(--white); }
+    .pb-wrap { background:var(--navy-deeper); padding:0 24px 36px; }
+    .pb { height:3px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden; }
+    .pbf { height:100%; background:var(--teal-light); border-radius:2px; transition:width 0.4s ease; }
+    .qbody { padding:72px 40px 40px; max-width:720px; width:100%; margin:0 auto; flex:1; }
+    .qnum { font-size:13px; color:var(--gray-500, #64748b); margin-bottom:8px; font-weight:500; }
+    .q-hint { font-size:13px; color:var(--gray-500, #64748b); font-style:italic; margin-bottom:20px; }
+    .qtext { font-size:clamp(17px,4vw,22px); font-weight:500; line-height:1.6; color:var(--navy-dark); margin-bottom:32px; min-height:4.5em; width:100%; }
+    .scale-ends { display:flex; justify-content:space-between; margin-bottom:10px; padding:0 2px; }
+    .se { font-size:11px; color:var(--gray-500, #64748b); line-height:1.3; }
+    .sopts { display:flex; gap:8px; margin-bottom:10px; }
+    .sbtn { flex:1; padding:14px 4px; border:2px solid var(--teal-light); background:var(--white); border-radius:10px; font-family:'Inter',sans-serif; font-size:20px; font-weight:700; color:var(--navy-dark); cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center; }
+    .sbtn:hover { background:var(--teal-pale); border-color:var(--navy-dark); transform:scale(1.04); }
+    .sbtn.sel { background:var(--navy-deeper); border-color:var(--navy-deeper); color:var(--white); transform:scale(1.07); }
+    .swords { display:flex; justify-content:space-between; margin-bottom:32px; padding:0 2px; }
+    .swords span { font-size:13px; color:var(--gray-500, #64748b); text-align:center; }
+    .navb { display:flex; gap:12px; }
+    .btn-back { background:transparent; border:1px solid var(--teal-light); color:var(--gray-600); padding:14px 20px; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+    .btn-back:hover { border-color:var(--navy-dark); color:var(--navy-dark); }
+    .btn-next { flex:1; background:var(--navy-deeper); color:var(--white); border:none; padding:14px 24px; border-radius:8px; font-family:'Inter',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; opacity:0.35; pointer-events:none; }
+    .btn-next.on { opacity:1; pointer-events:all; }
+    .btn-next.on:hover { background:var(--navy-dark); }
+
+    /* RESULT */
+    #result-screen { background:var(--gray-50); }
+    .rh {
+      background: var(--navy-deeper);
+      background-image: radial-gradient(ellipse 600px 400px at 90% 0%, rgba(107,155,141,0.1) 0%, transparent 65%);
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .rgreet { font-size:14px; font-weight:500; color:var(--teal-light); margin-bottom:8px; position:relative; }
+    .rtitle { font-size:clamp(26px,6vw,38px); font-weight:800; color:var(--white); line-height:1.2; position:relative; margin-bottom:8px; }
+    .rtitle span { color:var(--teal-light); }
+    .rbody { padding:28px 40px; max-width:860px; width:100%; margin:0 auto; }
+    .dom-box { background:var(--navy-deeper); border-radius:14px; padding:24px 22px; margin-bottom:16px; color:var(--white); }
+    .dom-tag { font-size:11px; font-weight:600; color:var(--teal-light); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; display:block; }
+    .dom-name { font-size:26px; font-weight:700; color:var(--white); margin-bottom:6px; line-height:1.3; }
+    .dom-score { font-size:14px; color:rgba(255,255,255,0.6); }
+    .dom-tie-note { font-size:13px; color:rgba(255,255,255,0.55); margin-top:8px; line-height:1.5; }
+    /* Ergebnis-Karten */
+    #d-cards { display:grid; gap:12px; }
+    .dc { background:var(--white); border-radius:14px; padding:20px; box-shadow:0 2px 10px rgba(13,27,42,0.08); border-left:4px solid var(--navy-deeper); position:relative; }
+    .dc-r1 { border-left:4px solid var(--teal); background:linear-gradient(135deg,rgba(74,136,120,0.06) 0%,var(--white) 60%); padding:24px; }
+    .dc-r4, .dc-r5 { background:var(--gray-50); box-shadow:none; border-left-color:#cbd5e1; }
+    .dc-rank { display:block; font-size:11px; font-weight:700; letter-spacing:1px; color:rgba(13,27,42,0.25); text-transform:uppercase; margin-bottom:8px; }
+    .dc-r1 .dc-rank { color:var(--teal); }
+    .dch { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; gap:12px; }
+    .dcn { font-size:17px; font-weight:600; color:var(--navy-dark); line-height:1.3; }
+    .dc-r1 .dcn { font-size:20px; }
+    .dcs { background:var(--navy-deeper); color:var(--white); padding:5px 12px; border-radius:20px; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0; }
+    .dc-r1 .dcs { background:var(--teal); }
+    .dc-r4 .dcs, .dc-r5 .dcs { background:#94a3b8; font-size:13px; }
+    .dbw { background:var(--gray-200, #e2e8f0); height:6px; border-radius:3px; overflow:hidden; margin-bottom:12px; }
+    .db { height:100%; border-radius:3px; background:var(--teal); width:0%; transition:width 1.2s ease; }
+    .dc-r4 .db, .dc-r5 .db { background:#94a3b8; }
+    .dscale { display:flex; gap:6px; margin-bottom:10px; }
+    .seg { flex:1; padding:6px; border-radius:6px; font-size:10px; text-align:center; line-height:1.3; border:1px solid transparent; }
+    .seg.off { background:var(--gray-50); color:var(--gray-600); border-color:var(--gray-200, #e2e8f0); }
+    .seg.s-low { background:#e8f4ec; color:#3a6a4a; border-color:#b8d8c0; font-weight:500; }
+    .seg.s-mid { background:#f4ede0; color:#8a5a1a; border-color:#d8c090; font-weight:500; }
+    .seg.s-high { background:#f4e0e0; color:#8a2a2a; border-color:#d89090; font-weight:500; }
+    .dlv { font-size:13px; font-weight:600; margin-bottom:6px; }
+    .dde { font-size:13px; color:var(--gray-600); line-height:1.55; }
+    .dc-r4 .dde, .dc-r5 .dde { display:none; }
+    .d-trading { margin-top:10px; font-size:13px; color:var(--navy-dark); line-height:1.75; border-left:3px solid var(--teal); padding-left:10px; }
+    .d-trading b { font-weight:700; font-style:normal; display:block; margin-bottom:2px; }
+    .dcn i { width:18px; height:18px; color:var(--teal); vertical-align:middle; margin-right:6px; stroke-width:2; }
+    .lv-low { color:#3a6a4a; } .lv-mid { color:#8a5a1a; } .lv-high { color:#8a2a2a; }
+    .meaning { background:var(--navy-deeper); border-radius:14px; padding:26px 22px; margin-bottom:16px; color:var(--white); }
+    .meaning h3 { font-size:19px; font-weight:700; color:var(--teal-light); margin-bottom:16px; }
+    .mi { margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid rgba(107,155,141,0.15); }
+    .mi:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .mi h4 { font-size:12px; font-weight:600; color:var(--teal-light); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px; }
+    .mi p { font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; }
+    .tip-box { background:var(--white); border-radius:14px; padding:24px 20px; margin-bottom:16px; border:1px solid var(--gray-200, #e2e8f0); border-left:4px solid var(--teal); }
+    .tip-tag { font-size:11px; font-weight:600; color:var(--navy-dark); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; display:block; }
+    .tip-title { font-size:18px; font-weight:700; color:var(--navy-dark); margin-bottom:10px; }
+    .tip-text { font-size:15px; color:var(--gray-600); line-height:1.7; }
+    .cta-box { background:var(--white); border-radius:14px; padding:28px 22px; margin-bottom:16px; text-align:center; border:2px solid var(--gray-200, #e2e8f0); }
+    .cta-tag { display:inline-block; background:var(--teal-pale); color:var(--teal); font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:16px; }
+    .cta-title { font-size:22px; font-weight:700; color:var(--navy-dark); margin-bottom:10px; line-height:1.3; }
+    .cta-desc { font-size:15px; color:var(--gray-600); line-height:1.65; margin-bottom:22px; text-align:left; }
+    .cta-inc { background:var(--gray-50); border-radius:10px; padding:16px; margin-bottom:22px; text-align:left; }
+    .cta-inc-t { font-size:11px; font-weight:600; color:var(--navy-dark); letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+    .cta-inc-i { display:flex; align-items:flex-start; gap:10px; font-size:15px; color:var(--gray-600); margin-bottom:7px; line-height:1.5; }
+    .cta-inc-i::before { content:'✓'; color:var(--teal); font-weight:700; flex-shrink:0; margin-top:1px; }
+    .cta-btn { display:block; background:var(--teal); color:var(--white); padding:16px 32px; border-radius:8px; font-family:'Inter',sans-serif; font-size:15px; font-weight:600; text-decoration:none; transition:all 0.2s; }
+    .cta-btn:hover { background:var(--teal-light); }
+    .disclaimer { background:var(--gray-50); border-radius:10px; padding:16px; margin-bottom:16px; font-size:12px; color:var(--gray-600); line-height:1.6; text-align:center; border:1px solid var(--gray-200, #e2e8f0); }
+    .rfooter { text-align:center; padding:0 24px 40px; font-size:12px; color:var(--gray-600); line-height:1.6; }
+
+    /* LOADING */
+    .loading { display:none; position:fixed; inset:0; background:var(--navy-deeper); z-index:200; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+    .loading.on { display:flex; }
+    .dots { display:flex; gap:8px; margin-bottom:24px; }
+    .dot { width:10px; height:10px; border-radius:50%; background:var(--teal-light); animation:bounce 1.2s infinite; }
+    .dot:nth-child(2) { animation-delay:0.2s; } .dot:nth-child(3) { animation-delay:0.4s; }
+    @keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5;} 40%{transform:scale(1.2);opacity:1;} }
+    .lt { font-size:20px; font-weight:600; color:var(--white); margin-bottom:8px; }
+    .ls { font-size:13px; color:rgba(255,255,255,0.5); }
+    .fade-in { animation:fi 0.35s ease; }
+    @keyframes fi { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+    @media(max-width:380px) { .sbtn{font-size:17px;padding:12px 2px;} .seg{font-size:9px;padding:4px 3px;} }
+    @media(max-width:600px) {
+      .qbody{padding:56px 20px 40px;}
+      .rbody{padding:24px 16px;}
+      .sopts{gap:6px;}
+      /* Welcome */
+      #welcome{padding:calc(var(--nav-h,72px) + 48px) 20px 60px;}
+      .w-title{font-size:clamp(22px,9vw,48px);}
+      .w-sub{font-size:15px;}
+      /* Reg */
+      .rc{padding:0 4px;}
+      /* Result */
+      .rh{padding:40px 20px 32px;}
+      .rtitle{font-size:clamp(22px,6vw,30px);}
+      .dc{padding:16px;}
+      .dcn{font-size:15px;}
+      .rbody{padding:20px 16px;}
+      .tip-box,.cta-box,.meaning{padding:20px 16px;}
+      /* Quiz */
+      .qbrand{font-size:10px;}
+      .qtext{font-size:clamp(15px,4vw,18px); min-height:auto;}
+      .navb{flex-direction:column; gap:8px;}
+      .btn-back{width:100%;}
+    }
+    @media(min-width:1024px) { .qbody{padding:80px 60px 60px;} .rbody{padding:40px 60px;} .qtext{font-size:22px;} #d-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;} .dc-r1-solo{grid-column:1 / -1;} }
+  </style>
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="Trading meets Nervensystem by Kristina">
+  <meta property="og:title"       content="0 € Tradingmuster-Check | Trading meets Nervensystem">
+  <meta property="og:description" content="Finde heraus, welche inneren Muster dein Trading sabotieren – kostenloser Selbsttest mit Sofortauswertung.">
+  <meta property="og:image"       content="https://tradingmeetsnervensystem.de/Foto_Startseite_oben.jpg">
+  <meta property="og:url"         content="https://tradingmeetsnervensystem.de/mustercheck.html">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="0 € Tradingmuster-Check | Trading meets Nervensystem">
+  <meta name="twitter:description" content="Finde heraus, welche inneren Muster dein Trading sabotieren – kostenloser Selbsttest mit Sofortauswertung.">
+  <meta name="twitter:image"       content="https://tradingmeetsnervensystem.de/Foto_Startseite_oben.jpg">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script></head>
+<body class="subpage">
+
+<!-- NAV -->
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="home.html" class="nav-logo">
+      <span class="logo-main">Trading meets Nervensystem</span>
+      <span class="logo-sub">by Kristina</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="beratung.html">Beratung</a></li>
+      <li><a href="übermich.html">Über mich</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a href="mustercheck.html" class="btn btn-teal btn-sm nav-cta">0 € Tradingmuster-Check</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="home.html">Home</a>
+  <a href="coaching.html">Coaching</a>
+  <a href="beratung.html">Beratung</a>
+  <a href="übermich.html">Über mich</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="mustercheck.html" class="btn btn-teal" style="margin-top:8px;justify-content:center;">0 € Tradingmuster-Check <span class="arrow">→</span></a>
+</div>
+
+<!-- LOADING -->
+<div class="loading" id="loading">
+  <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <div class="lt">Dein Ergebnis wird ausgewertet</div>
+  <div class="ls">Einen Moment bitte...</div>
+</div>
+
+<!-- WELCOME -->
+<div class="screen active" id="welcome">
+  <div class="wc fade-in">
+    <span class="brand-tag">Trading Meets Nervensystem</span>
+    <h1 class="w-title">Tradingmuster-<span>Check</span></h1>
+    <p class="w-sub">Du weißt wie du traden sollst. Trotzdem handelst du manchmal dagegen. Finde heraus welches Muster dich am meisten zurückhält.</p>
+    <p class="w-meta">50 Fragen · ca. 6 Minuten · Sofortauswertung</p>
+    <button class="btn-p" onclick="showReg()">Check starten</button>
+  </div>
+</div>
+
+<!-- REG -->
+<div class="screen" id="reg-screen">
+  <div class="rc fade-in">
+    <div class="reg-icon"><i data-lucide="clipboard-list" style="width:28px;height:28px;color:var(--teal);"></i></div>
+    <h2 class="reg-title">Zum Tradingmuster-Check</h2>
+    <p class="reg-sub">Trag deinen Namen und deine E-Mail ein. Du erhältst dein Ergebnis direkt nach dem Test.</p>
+    <div class="fw">
+      <label class="fl">Dein Vorname *</label>
+      <input type="text" class="fi" id="inp-name" placeholder="Dein Vorname">
+      <div class="em" id="err-name">Bitte trag deinen Namen ein.</div>
+    </div>
+    <div class="fw">
+      <label class="fl">Deine E-Mail *</label>
+      <input type="email" class="fi" id="inp-email" placeholder="deine@email.de">
+      <div class="em" id="err-email">Bitte trag eine gültige E-Mail ein.</div>
+    </div>
+    <label class="newsletter-wrap">
+      <span class="nl-badge">✦ Bonus für dich</span>
+      <div class="checkbox-row">
+        <input type="checkbox" id="newsletter-check">
+        <div class="custom-check">
+          <svg width="12" height="9" viewBox="0 0 12 9" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1,4.5 4.5,8 11,1"/>
+          </svg>
+        </div>
+        <div class="checkbox-content">
+          <strong style="display:inline;"><span style="font-weight:400;">Newsletter:</span> Weitere Impulse wie du im Trading deinen Plan einhältst</strong>
+          <span style="display:block; margin-top:5px; color:var(--teal); font-weight:600;">Kein Spam, jederzeit abmeldbar.</span>
+        </div>
+      </div>
+    </label>
+    <div class="priv-row">
+      Mit dem Absenden stimmst du der Verarbeitung deiner Daten zur Durchführung des Tests zu.
+      Weitere Informationen findest du in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+    </div>
+    <br>
+    <button class="btn-p" onclick="validateAndStart()">Check starten →</button>
+  </div>
+</div>
+
+<!-- SCALE INTRO -->
+<div class="screen" id="scale-intro" style="display:none">
+  <div class="si fade-in">
+    <h2 class="si-title">So funktioniert der Check</h2>
+    <p class="si-sub">Beantworte jede Aussage möglichst zügig und spontan, so wie du dich im Moment selbst siehst. Es gibt keine richtigen oder falschen Antworten.</p>
+    <div class="scale-preview">
+      <div class="sp-row"><span class="sp-num">5</span><span class="sp-label">Absolut, trifft völlig zu</span><span class="sp-pts">5 Punkte</span></div>
+      <div class="sp-row"><span class="sp-num">4</span><span class="sp-label">Ja, trifft zu</span><span class="sp-pts">4 Punkte</span></div>
+      <div class="sp-row"><span class="sp-num">3</span><span class="sp-label">Etwas, trifft manchmal zu</span><span class="sp-pts">3 Punkte</span></div>
+      <div class="sp-row"><span class="sp-num">2</span><span class="sp-label">Kaum, trifft selten zu</span><span class="sp-pts">2 Punkte</span></div>
+      <div class="sp-row"><span class="sp-num">1</span><span class="sp-label">Nie, trifft nicht zu</span><span class="sp-pts">1 Punkt</span></div>
+    </div>
+    <button class="btn-p" onclick="beginQuiz()">Los geht's</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="quiz-screen">
+  <div class="qh">
+    <span class="qbrand">Tradingmuster-Check</span>
+    <span class="qprog" id="qprog">1 / 50</span>
+  </div>
+  <div class="pb-wrap">
+    <div class="pb"><div class="pbf" id="pbf" style="width:2%"></div></div>
+  </div>
+  <div class="qbody fade-in">
+    <div class="qnum" id="qnum">Frage 1 von 50</div>
+    <p class="q-hint">Beantworte jede Aussage spontan – so wie du dich im Moment selbst siehst.</p>
+    <div class="qtext" id="qtext"></div>
+    <div class="scale-ends">
+      <span class="se">Trifft gar<br>nicht zu</span>
+      <span class="se" style="text-align:right">Trifft völlig<br>zu</span>
+    </div>
+    <div class="sopts">
+      <button class="sbtn" onclick="pick(1)">1</button>
+      <button class="sbtn" onclick="pick(2)">2</button>
+      <button class="sbtn" onclick="pick(3)">3</button>
+      <button class="sbtn" onclick="pick(4)">4</button>
+      <button class="sbtn" onclick="pick(5)">5</button>
+    </div>
+    <div class="swords">
+      <span>Nie</span><span>Kaum</span><span>Etwas</span><span>Ja</span><span>Absolut</span>
+    </div>
+    <div class="navb">
+      <button class="btn-back" onclick="prev()" id="btn-back" style="display:none">Zurück</button>
+      <button class="btn-next" id="btn-next" onclick="next()">Weiter</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="result-screen">
+  <div class="rh">
+    <div class="rgreet" id="rgreet">Dein Ergebnis</div>
+    <h1 class="rtitle">Dein<br><span>Muster-Profil</span></h1>
+  </div>
+  <div class="rbody">
+    <div id="dom-box"></div>
+    <div id="d-cards"></div>
+
+    <div style="height:24px"></div>
+
+    <div class="meaning">
+      <h3>Was das für dich bedeutet</h3>
+      <div class="mi">
+        <p>Die Punkteskala dient der Orientierung – entscheidend ist nicht der genaue Wert, sondern welche Muster bei dir im Vergleich stärker ausgeprägt sind. Dein höchster Wert ist dein dominantes Muster, es übernimmt am schnellsten wenn Druck entsteht. Aber: Ein höherer Punktwert bedeutet nicht automatisch, dass dieses Muster dich im Trading am meisten kostet. Frag dich deshalb: <b>Bei welchem Muster erkenne ich mich im Trading am stärksten wieder?</b> Das ist dein Ansatzpunkt.</p>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-tag">Was jetzt?</span>
+      <h3 class="tip-title">Erkenne wann dein Muster aktiv wird</h3>
+      <p class="tip-text">Diese Muster laufen automatisch – nicht weil du grundsätzlich ein undisziplinierter Trader bist, sondern weil dein Nervensystem sie unter Druck aktiviert. Erkennen ist der erste Schritt. Aber für eine nachhaltige Veränderung musst du verstehen, was das Muster wirklich antreibt.</p>
+    </div>
+
+    <div class="cta-box">
+      <span class="cta-tag">Nächster Schritt</span>
+      <h3 class="cta-title">Was hinter deinem Muster steckt</h3>
+      <p class="cta-desc">Du machst keine schlechten Trades weil du kein Wissen hast. Du machst sie, weil in bestimmten Momenten etwas in dir übernimmt und das passiert nicht zufällig. Hinter jedem Muster steckt eine tiefe Überzeugung, die deinem Nervensystem sagt wie es reagieren soll. Solange die unverändert bleibt, wirst du das Muster nicht loswerden, ganz egal wie viel Disziplin du versuchst aufzubringen. Der Workshop <b>„Das steckt hinter deinem Muster"</b> zeigt dir wo du wirklich ansetzen musst, <b>um dieses Muster abzulegen.</b></p>
+      <div class="cta-inc">
+        <div class="cta-inc-t">Das erwartet dich im Workshop</div>
+        <div class="cta-inc-i">Du weißt endlich warum du gegen deinen Plan handelst – nicht als Theorie, sondern konkret auf dich bezogen</div>
+        <div class="cta-inc-i">Du siehst den direkten Zusammenhang zwischen deinem Muster und deinen schlechtesten Trades</div>
+        <div class="cta-inc-i"><b>Du findest die Ursache – nicht das Symptom</b></div>
+        <div class="cta-inc-i"><b>Du kennst deinen Kernglaubenssatz und weißt genau wo du ansetzen musst</b></div>
+      </div>
+      <a class="cta-btn" href="DEINE-KURS-URL-HIER" target="_blank">Zum Workshop – 27 EUR</a>
+    </div>
+
+    <div class="disclaimer">
+      Dieser Test basiert auf dem Muster-Konzept der Transaktionsanalyse (Taibi Kahler). Er ist kein klinisches Diagnoseinstrument sondern ein Reflexionswerkzeug. Die Punkteskala dient der Orientierung, entscheidend ist welche Muster bei dir im Vergleich stärker ausgeprägt sind.
+    </div>
+    <div class="rfooter">@trading.meets.nervensystem</div>
+  </div>
+</div>
+
+<footer class="footer" style="padding:32px 0;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0;">© 2026 tradingmeetsnervensystem.de · Alle Rechte vorbehalten</p>
+      <div style="display:flex;gap:20px;">
+        <a href="impressum.html" style="font-size:0.8rem;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Impressum</a>
+        <a href="datenschutz.html" style="font-size:0.8rem;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Datenschutz</a>
+        <a href="#" onclick="localStorage.removeItem('cookie-consent');showCookieBanner();return false;" style="font-size:0.8rem;color:rgba(255,255,255,0.4);transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Cookie-Einstellungen</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const FORMSPREE_ID = 'xlgzavbe';
+
+// ── Brevo Einbindung ──────────────────────────────────────────────
+
+
+
+async function subscribeToBrevo(name, email) {
+  try {
+    await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email })
+    });
+  } catch(e) {
+    console.warn('Brevo nicht erreichbar:', e.message);
+  }
+}
+// ─────────────────────────────────────────────────────────────────
+
+const questions = [
+"Was ich anfange, mache ich gründlich.",
+"Ich fühle mich dafür verantwortlich, dass sich andere in meiner Nähe wohlfühlen.",
+"Ich bin ständig auf Trab.",
+"Ich zeige anderen gegenüber ungern meine Schwächen.",
+"Wenn ich nichts tue, fühle ich mich schnell unproduktiv.",
+"Ich sage häufig Dinge wie: \"Das lässt sich schwer so genau sagen.\"",
+"Ich sage oft mehr als eigentlich notwendig wäre.",
+"Es fällt mir schwer Leute die nicht genau sind zu akzeptieren.",
+"Es fällt mir schwer Gefühle zu zeigen.",
+"Nur nicht locker lassen ist meine Einstellung.",
+"Wenn ich eine Meinung äußere, begründe ich sie auch.",
+"Wenn ich etwas möchte, sorge ich schnell dafür, dass ich es bekomme.",
+"Eine Aufgabe gebe ich erst ab, wenn ich sie mehrmals überarbeitet habe.",
+"Leute die \"herumtrödeln\" regen mich auf.",
+"Es ist mir wichtig, von anderen akzeptiert zu werden.",
+"Ich habe eher eine harte Schale aber einen weichen Kern.",
+"Ich versuche oft herauszufinden, was andere von mir erwarten – und richte mich dann danach.",
+"Menschen, die einfach unbekümmert in den Tag hineinleben, kann ich nur schwer verstehen.",
+"In Gesprächen unterbreche ich andere häufig.",
+"Ich löse meine Probleme selber.",
+"Ich erledige Aufgaben so schnell wie möglich.",
+"Zu anderen halte ich meist eine gewisse Distanz.",
+"Bei vielen Dingen denke ich: Ich hätte es besser machen können.",
+"Ich kümmere mich persönlich um nebensächliche Details.",
+"Erfolge kommen nicht von selbst – ich muss sie mir hart erarbeiten.",
+"Für dumme Fehler habe ich wenig Verständnis.",
+"Ich schätze es, wenn andere kurz und direkt antworten.",
+"Es ist mir wichtig zu hören, ob ich meine Arbeit gut gemacht habe.",
+"Was ich anfange, bringe ich auch zu Ende.",
+"Ich stelle meine Wünsche und Bedürfnisse zugunsten jeder anderen Person zurück.",
+"Ich bin anderen gegenüber oft hart, um von anderen nicht verletzt zu werden.",
+"Ich klopfe oft ungeduldig mit meinen Fingern auf den Tisch.",
+"Wenn ich etwas erkläre, gliedere ich es gerne: \"Erstens... zweitens... drittens...\"",
+"Ich glaube, dass die meisten Dinge nicht so einfach sind wie viele meinen.",
+"Es ist mir unangenehm, andere zu kritisieren.",
+"In Gesprächen nicke ich häufig zustimmend.",
+"Ich strenge mich an meine Ziele zu erreichen.",
+"Mein Gesichtsausdruck ist eher ernst.",
+"Ich bin häufig nervös.",
+"So schnell kann mich nichts erschüttern.",
+"Meine Probleme gehen andere nichts an.",
+"Ich sage häufig Dinge wie: \"Jetzt macht mal vorwärts.\"",
+"Ich benutze häufig Worte wie \"Genau\", \"Exakt\" oder \"Logisch\".",
+"Ich sage häufig: \"Das verstehe ich nicht.\"",
+"Ich sage eher: \"Könnten Sie es nicht mal versuchen?\", statt: \"Versuchen Sie es einmal.\"",
+"Ich bin diplomatisch.",
+"Ich versuche die an mich gestellten Erwartungen zu übertreffen.",
+"Beim Telefonieren erledige ich oft nebenbei noch andere Dinge.",
+"\"Auf die Zähne beißen und weitermachen\" – das ist meine Einstellung.",
+"Trotz enormer Anstrengung will mir vieles nicht gelingen.",
+];
+
+const driverQuestions = {
+  p: [1,6,8,11,13,23,24,33,43,47],
+  s: [3,12,14,19,21,27,32,39,42,48],
+  a: [5,10,18,25,29,34,37,44,49,50],
+  r: [2,7,15,17,28,30,35,36,45,46],
+  k: [4,9,16,20,22,26,31,38,40,41],
+};
+
+const driverInfo = {
+  p: {name:"Sei perfekt", emoji:'<i data-lucide="target"></i>', trading:"<b>Zum Beispiel:</b><br>• Du analysierst so lange, bis du dir nicht mehr sicher bist – und verpasst den Trade.<br>• Die Angst, einen Fehler zu machen, ist oft größer als die Angst, eine Chance zu verpassen.<br>• Abgeschlossene Trades überprüfst du immer noch einmal – und findest immer etwas, was besser hätte laufen können."},
+  s: {name:"Mach schnell", emoji:'<i data-lucide="zap"></i>', trading:"<b>Zum Beispiel:</b><br>• Du steigst ein, bevor du fertig gedacht hast – und weißt es eigentlich schon beim Klick.<br>• Du schließt Positionen frühzeitig, weil das Warten sich unerträglich anfühlt.<br>• Du wechselst die Strategie, bevor du ihr wirklich eine Chance gegeben hast."},
+  a: {name:"Streng dich an", emoji:'<i data-lucide="trending-up"></i>', trading:"<b>Zum Beispiel:</b><br>• Du glaubst, je härter du arbeitest, desto besser läuft es.<br>• Du tradest auch wenn du müde bist, weil Aufhören sich falsch anfühlt.<br>• Du glaubst, du musst noch mehr tun – noch ein Chart, noch ein Setup – und gibst dir selten die Erlaubnis aufzuhören."},
+  r: {name:"Mach es allen recht", emoji:'<i data-lucide="users"></i>', trading:"<b>Zum Beispiel:</b><br>• Du suchst Bestätigung bei anderen Tradern, bevor du auf deine eigene Analyse vertraust.<br>• Du folgst Signalen aus Gruppen, auch wenn dein Bauchgefühl etwas anderes sagt.<br>• Du verlässt deine Position, sobald jemand anderes eine Gegenmeinung äußert."},
+  k: {name:"Sei stark", emoji:'<i data-lucide="shield"></i>', trading:"<b>Zum Beispiel:</b><br>• Du verdrängst Gefühle so lange, bis sie sich plötzlich in einer impulsiven Entscheidung entladen.<br>• Du redest dir ein, dass Emotionen kein Thema sind – und merkst nicht, wie sie dich trotzdem steuern.<br>• Verluste steckst du weg, bis der Druck zu groß wird – dann kommt das Rachetrading."},
+};
+
+const driverOrder = ['p','s','a','r','k'];
+
+let answers = new Array(50).fill(null);
+let cur = 0;
+let uName = '', uEmail = '', uNewsletter = false;
+
+function showReg() {
+  document.getElementById('welcome').classList.remove('active');
+  document.getElementById('reg-screen').classList.add('active');
+}
+
+function validateAndStart() {
+  const name = document.getElementById('inp-name').value.trim();
+  const email = document.getElementById('inp-email').value.trim();
+  let ok = true;
+  if (!name) {
+    document.getElementById('inp-name').classList.add('errf');
+    document.getElementById('err-name').style.display = 'block';
+    ok = false;
+  } else {
+    document.getElementById('inp-name').classList.remove('errf');
+    document.getElementById('err-name').style.display = 'none';
+  }
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    document.getElementById('inp-email').classList.add('errf');
+    document.getElementById('err-email').style.display = 'block';
+    ok = false;
+  } else {
+    document.getElementById('inp-email').classList.remove('errf');
+    document.getElementById('err-email').style.display = 'none';
+  }
+  if (!ok) return;
+  uName = name; uEmail = email;
+  uNewsletter = document.getElementById('newsletter-check').checked;
+  // Kontaktdaten sofort sichern (auch bei Abbruch)
+  submitFS();
+  // Brevo DOI nur wenn Häkchen gesetzt (DSGVO-konform)
+  if (uNewsletter) subscribeToBrevo(uName, uEmail); // fire & forget – Quiz wird nicht geblockt
+  document.getElementById('reg-screen').classList.remove('active');
+  document.getElementById('quiz-screen').classList.add('active');
+  render();
+}
+
+function beginQuiz() {
+  document.getElementById('scale-intro').classList.remove('active');
+  document.getElementById('quiz-screen').classList.add('active');
+  render();
+}
+
+function render() {
+  document.getElementById('qtext').textContent = questions[cur];
+  document.getElementById('qnum').textContent = `Frage ${cur+1} von ${questions.length}`;
+  document.getElementById('qprog').textContent = `${cur+1} / ${questions.length}`;
+  document.getElementById('pbf').style.width = `${((cur+1)/questions.length)*100}%`;
+  document.querySelectorAll('.sbtn').forEach((b,i) => b.classList.toggle('sel', answers[cur]===i+1));
+  const nb = document.getElementById('btn-next');
+  nb.classList.toggle('on', answers[cur]!==null);
+  nb.textContent = cur===questions.length-1 ? 'Auswertung ansehen' : 'Weiter';
+  document.getElementById('btn-back').style.display = cur>0 ? 'block' : 'none';
+  const qb = document.querySelector('.qbody');
+  qb.classList.remove('fade-in'); void qb.offsetWidth; qb.classList.add('fade-in');
+}
+
+function pick(v) {
+  answers[cur] = v;
+  document.querySelectorAll('.sbtn').forEach((b,i) => b.classList.toggle('sel', i+1===v));
+  document.getElementById('btn-next').classList.add('on');
+}
+
+function next() {
+  if (answers[cur]===null) return;
+  if (cur < questions.length-1) { cur++; render(); }
+  else { document.getElementById('loading').classList.add('on'); setTimeout(showResult,2200); }
+}
+
+function prev() { if(cur>0){cur--;render();} }
+
+async function submitFS() {
+  if (!FORMSPREE_ID) return;
+  const body = {
+    name: uName, email: uEmail,
+    newsletter_einwilligung: uNewsletter ? 'Ja, Einwilligung erteilt' : 'Nein',
+  };
+  try {
+    await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(body)
+    });
+  } catch(e){}
+}
+
+function calcScores() {
+  const sc = {p:0,s:0,a:0,r:0,k:0};
+  driverOrder.forEach(d => {
+    driverQuestions[d].forEach(qNum => { sc[d]+=(answers[qNum-1]||0); });
+  });
+  return sc;
+}
+
+function getLevel(score) {
+  if (score<=20) return {label:"Kaum aktiv",cls:"lv-low",desc:"Dieses Muster ist kaum aktiv und beeinflusst dein Verhalten derzeit wenig.",segs:["s-low","off","off"]};
+  if (score<=34) return {label:"Gelegentlich aktiv",cls:"lv-mid",desc:"Dieses Muster ist gelegentlich aktiv, vor allem unter Druck.",segs:["off","s-mid","off"]};
+  return {label:"Stark ausgeprägt",cls:"lv-high",desc:"Dieses Muster läuft häufig ganz automatisch, besonders wenn der Druck steigt.",segs:["off","off","s-high"]};
+}
+
+function showResult() {
+  document.getElementById('loading').classList.remove('on');
+  document.getElementById('quiz-screen').classList.remove('active');
+  document.getElementById('result-screen').classList.add('active');
+  document.getElementById('rgreet').textContent = `Hallo ${uName}, hier ist dein Ergebnis`;
+
+  const sc = calcScores();
+  const maxScore = Math.max(...driverOrder.map(k => sc[k]));
+  const topDrivers = driverOrder.filter(k => sc[k] === maxScore);
+
+  let domHTML = '<div class="dom-box">';
+  if (topDrivers.length === 1) {
+    const dom = driverInfo[topDrivers[0]];
+    domHTML += `<span class="dom-tag">Dein dominantes Muster</span><div class="dom-name">${dom.emoji} ${dom.name}</div><div class="dom-score">${sc[topDrivers[0]]} von 50 Punkten, ${getLevel(sc[topDrivers[0]]).label}</div>`;
+  } else {
+    domHTML += `<span class="dom-tag">Deine dominanten Muster</span><div class="dom-name">${topDrivers.map(k => `${driverInfo[k].emoji} ${driverInfo[k].name}`).join('<br>')}</div><div class="dom-score">Alle mit ${maxScore} von 50 Punkten, ${getLevel(maxScore).label}</div><div class="dom-tie-note">Diese Muster sind bei dir gleich stark ausgeprägt und arbeiten oft zusammen.</div>`;
+  }
+  domHTML += '</div>';
+  document.getElementById('dom-box').innerHTML = domHTML;
+
+  const sortedDrivers = [...driverOrder].sort((a,b) => sc[b] - sc[a]);
+  const topCount = sortedDrivers.filter(k => sc[k] === maxScore).length;
+  // Rang mit Gleichstand: 1,1,3,4,5
+  let rankCounter = 1;
+  const ranks = sortedDrivers.map((k,idx) => {
+    if (idx > 0 && sc[k] < sc[sortedDrivers[idx-1]]) rankCounter = idx + 1;
+    return rankCounter;
+  });
+  document.getElementById('d-cards').innerHTML = sortedDrivers.map((k,idx) => {
+    const rank = ranks[idx];
+    const isTop = rank === 1;
+    const solo = isTop && topCount === 1;
+    const score = sc[k];
+    const d = driverInfo[k];
+    const lv = getLevel(score);
+    const pct = Math.round((score/50)*100);
+    const rankClass = isTop ? (solo ? 'dc-r1 dc-r1-solo' : 'dc-r1 dc-r1-tied') : (rank <= 3 ? 'dc-r2' : 'dc-r4');
+    const rankLabel = isTop ? '★ Stärkstes Muster' : '#' + rank;
+    return `<div class="dc ${rankClass}"><div class="dc-rank">${rankLabel}</div><div class="dch"><div class="dcn">${d.emoji} ${d.name}</div><div class="dcs">${score} / 50</div></div><div class="dbw"><div class="db" data-w="${pct}%"></div></div><div class="dscale"><div class="seg ${lv.segs[0]}">10 bis 20<br>Kaum aktiv</div><div class="seg ${lv.segs[1]}">21 bis 34<br>Gelegentlich</div><div class="seg ${lv.segs[2]}">35 bis 50<br>Stark ausgeprägt</div></div><div class="dlv ${lv.cls}">${lv.label}</div><div class="dde">${lv.desc}</div><div class="d-trading">${d.trading}</div></div>`;
+  }).join('');
+
+  setTimeout(()=>{ document.querySelectorAll('.db').forEach(b=>b.style.width=b.dataset.w); },300);
+  lucide.createIcons();
+  window.scrollTo(0,0);
+}
+
+lucide.createIcons();
+</script>
+<script src="cookie-banner.js"></script>
+</body>
+</html>
+
+
+
+
+
