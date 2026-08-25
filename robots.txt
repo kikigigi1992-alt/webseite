@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /webseite-backup/
+Disallow: /icon-preview.html
+
+Sitemap: https://tradingmeetsnervensystem.de/sitemap.xml
