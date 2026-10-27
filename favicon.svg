@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Hintergrund: abgerundetes Quadrat in Navy -->
+  <rect width="32" height="32" rx="7" fill="#0d1b2a"/>
+  <!-- EKG / Nervensystem-Linie in Teal -->
+  <polyline
+    points="3,26 7,23 10,27 14,19 18,21 22,12 25,14 29,6"
+    stroke="#6d9488"
+    stroke-width="2.6"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
