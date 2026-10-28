@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://tradingmeetsnervensystem.de/traders-edge.html">
+  <title>Trader's Edge: Begleiteter Onlinekurs</title>
+  <meta name="description" content="Tradingplan einhalten, auch wenn es eng wird. Begleiteter Onlinekurs für Trader, deren Strategie funktioniert, die sie aber im entscheidenden Moment nicht umsetzen.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap">
+  <script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+
+    :root {
+      --navy:        #25405d;
+      --navy-dark:   #1a2d42;
+      --navy-deeper: #0d1b2a;
+      --teal:        #6d9488;
+      --teal-light:  #8faea3;
+      --teal-pale:   #eef3f1;
+      --gray-50:     #f7f9fc;
+      --gray-100:    #edf2f7;
+      --gray-200:    #dde3ec;
+      --gray-500:    #64748b;
+      --gray-600:    #475569;
+      --white:       #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--navy-dark);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── PLACEHOLDER STYLE ─────────────────────── */
+    .placeholder {
+      background: #fff8e1;
+      border: 1.5px dashed #f59e0b;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+      font-style: italic;
+      margin: 8px 0;
+    }
+
+    /* ── NAV ───────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,20,34,0.98);
+      backdrop-filter: blur(20px);
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(143,174,163,0.35);
+      box-shadow: 0 1px 0 rgba(143,174,163,0.12), 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1.1; text-decoration: none; }
+    .nav-logo .logo-main {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .btn-nav {
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover { background: var(--teal-light); }
+
+    /* ── BUTTONS ───────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      padding: 17px 40px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+    .btn-note { font-size: 13px; color: var(--white); margin-top: 10px; font-weight: 500; }
+    .hero-cta-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-top: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-note-dark { font-size: 13px; color: var(--white); margin-top: 10px; font-weight: 500; }
+
+    /* ── HERO ──────────────────────────────────── */
+    #hero {
+      background: var(--navy-deeper);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 540px;
+      overflow: hidden;
+    }
+    .hero-inner {
+      padding: 100px 24px 100px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-brand {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(52px, 6.5vw, 84px);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.0;
+      margin-bottom: 10px;
+    }
+    .hero-underline {
+      width: clamp(200px, 55%, 340px);
+      height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--teal-light);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      background: rgba(109,148,136,0.15);
+      padding: 5px 14px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    .hero-title {
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.45;
+      margin-bottom: 28px;
+      text-wrap: balance;
+    }
+    .hero-title em { color: var(--teal-light); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(14px, 1.5vw, 16px);
+      color: rgba(255,255,255,0.62);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .hero-meta span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta span::before { content: '·'; color: var(--teal-light); font-weight: 700; }
+    .hero-meta span:first-child::before { content: '·'; }
+    .btn-note { font-size: 13px; color: var(--white); margin-top: 10px; font-weight: 500; }
+    .hero-photo-col {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-photo-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top right;
+      display: block;
+    }
+    .hero-photo-col::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--navy-deeper) 0%, transparent 6%);
+      z-index: 1;
+    }
+    .hero-byline {
+      position: absolute;
+      bottom: 22px;
+      right: 22px;
+      z-index: 2;
+      background: rgba(109,148,136,0.85);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .hero-byline strong { font-weight: 700; }
+
+    /* ── SECTION BASICS ────────────────────────── */
+    section { padding: 60px 24px; }
+    .container { max-width: 760px; margin: 0 auto; }
+    .container-wide { max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: block;
+      text-align: center;
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--navy-deeper);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      text-wrap: balance;
+      text-align: center;
+    }
+    .section-title em { color: var(--teal); font-style: normal; }
+    .body-text {
+      font-size: 16px;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .body-text:last-child { margin-bottom: 0; }
+    .body-text strong { color: var(--navy-dark); font-weight: 600; }
+
+    /* ── DIVIDER ───────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--gray-200);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── PROBLEM ───────────────────────────────── */
+    #problem { background: var(--gray-50); }
+    .quote-block {
+      border-left: 3px solid var(--teal);
+      padding: 18px 22px;
+      background: var(--teal-pale);
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 28px;
+    }
+    .quote-block p {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy-deeper);
+      line-height: 1.5;
+    }
+    .problem-lead {
+      font-size: 16px;
+      color: var(--navy-dark);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .problem-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .problem-list li {
+      font-size: 16px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      padding-left: 22px;
+      position: relative;
+    }
+    .problem-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    /* ── WHY ───────────────────────────────────── */
+    #why { background: var(--gray-50); }
+    .callout {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-top: 28px;
+    }
+    .callout p { font-size: 15px; color: var(--navy-dark); line-height: 1.7; }
+    .callout p strong { color: var(--teal); }
+
+    /* ── METHOD ────────────────────────────────── */
+    #method { background: var(--white); }
+    .method-intro { font-size: 16px; color: var(--gray-600); line-height: 1.8; margin-bottom: 40px; }
+    .modules { display: flex; flex-direction: column; gap: 16px; }
+    .module-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 22px 24px;
+      border-left: 4px solid var(--teal);
+    }
+    .module-card.intro-card { border-left-color: var(--gray-200); }
+    .module-letter {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--navy-deeper);
+      color: var(--teal-light);
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .module-card.intro-card .module-letter { background: var(--gray-200); color: var(--gray-600); font-size: 14px; }
+    .module-title { font-size: 15px; font-weight: 700; color: var(--navy-deeper); margin-bottom: 5px; }
+    .module-desc { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+    /* ── SCHEDULE ──────────────────────────────── */
+    #schedule { background: var(--gray-50); }
+    .schedule-text { font-size: 16px; color: var(--gray-600); line-height: 1.8; margin-bottom: 36px; }
+    .schedule-table-wrap { overflow-x: auto; margin-bottom: 32px; }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 520px;
+    }
+    .schedule-table th {
+      background: var(--navy-deeper);
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 11px 16px;
+      text-align: left;
+    }
+    .schedule-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--navy-dark);
+      background: var(--white);
+      vertical-align: middle;
+    }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table .week-num { color: var(--gray-500); font-size: 13px; }
+    .schedule-table .call-date { color: var(--teal); font-weight: 600; }
+    .schedule-table .no-call { color: var(--gray-500); }
+    .schedule-table .integration { color: var(--gray-500); font-style: italic; }
+    .schedule-table .week-period { font-size: 13px; color: var(--gray-500); white-space: nowrap; }
+    .xmas-row td {
+      background: var(--navy-deeper) !important;
+      color: rgba(255,255,255,0.55) !important;
+      font-size: 13px;
+      text-align: center;
+    }
+    .info-boxes { display: grid; gap: 16px; }
+    .info-box {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .info-box-title { font-size: 13px; font-weight: 700; color: var(--navy-dark); letter-spacing: 0.5px; margin-bottom: 7px; text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; }
+    .info-box p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+
+    /* ── FOR WHOM ──────────────────────────────── */
+    #forwhom { background: var(--white); }
+    .fit-grid { display: grid; gap: 20px; }
+    .fit-card {
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .fit-card.yes {
+      background: rgba(45,106,79,0.06);
+      border: 1px solid rgba(45,106,79,0.15);
+    }
+    .fit-card.no {
+      background: rgba(139,32,32,0.05);
+      border: 1px solid rgba(139,32,32,0.12);
+    }
+    .fit-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fit-card.yes .fit-title { color: #2d6a4f; }
+    .fit-card.no .fit-title { color: #8b2020; }
+    .fit-list { list-style: none; }
+    .fit-list li {
+      font-size: 14px;
+      color: var(--navy-dark);
+      line-height: 1.6;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .fit-list li:last-child { border-bottom: none; }
+    .fit-list li::before { flex-shrink: 0; margin-top: 3px; }
+    .fit-card.yes .fit-list li::before { content: '✓'; color: #2d6a4f; font-weight: 700; }
+    .fit-card.no .fit-list li::before { content: '✕'; color: #8b2020; font-weight: 700; }
+    .fit-note {
+      margin-top: 28px;
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── ABOUT ─────────────────────────────────── */
+    #about { background: var(--gray-50); }
+    .about-grid { display: grid; gap: 36px; align-items: start; }
+    .about-img-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--gray-200);
+      aspect-ratio: 3/4;
+      max-width: 300px;
+    }
+    .about-img-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--gray-100);
+    }
+    .about-img-placeholder span { font-size: 13px; color: var(--gray-500); }
+
+    /* ── TESTIMONIALS ──────────────────────────── */
+    #testimonials { background: var(--navy-deeper); }
+    #testimonials .section-tag { color: var(--teal-light); }
+    #testimonials .section-title { color: var(--white); }
+    .context-box {
+      background: var(--gray-200);
+      border: none;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 32px;
+    }
+    .context-box p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+    .testimonials-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .testimonials { display: flex; flex-direction: column; gap: 16px; }
+    .tcard {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .tcard-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .tcard-text {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+    .tcard-text em { color: var(--navy-dark); font-style: normal; font-weight: 500; }
+    .tcard-headline {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-deeper);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      text-transform: none;
+    }
+    .tcard.tcard-gray { background: var(--gray-50); }
+
+    /* ── INCLUDES ──────────────────────────────── */
+    #includes { background: var(--white); }
+    .includes-grid { display: grid; gap: 12px; }
+    .include-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+    }
+    .include-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--teal-pale);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .include-icon svg { width: 20px; height: 20px; color: var(--teal); stroke: var(--teal); }
+    .price-pill svg { vertical-align: middle; stroke: var(--navy-dark); margin-right: 5px; }
+    .include-title { font-size: 14px; font-weight: 600; color: var(--navy-deeper); margin-bottom: 3px; }
+    .include-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* ── PRICE ─────────────────────────────────── */
+    #price { background: var(--gray-50); }
+    .early-note {
+      background: rgba(10,20,34,0.98);
+      color: rgba(255,255,255,0.85);
+      border-radius: 12px;
+      padding: 28px 32px;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-top: 32px;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .early-note strong { display: block; font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--teal-light); }
+    .price-card {
+      background: rgba(10,20,34,0.98);
+      border: 1px solid rgba(143,174,163,0.2);
+      border-radius: 16px;
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--teal-light); text-transform: uppercase; margin-bottom: 16px; }
+    .price-amount { font-size: 52px; font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1; margin-bottom: 28px; }
+    .price-amount span { font-size: 24px; font-weight: 600; vertical-align: super; line-height: 0; }
+    .price-rate { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .price-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: var(--teal-pale);
+      color: var(--navy-dark);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ── FAQ ───────────────────────────────────── */
+    #faq { background: var(--white); }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--gray-200); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 20px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy-deeper);
+      line-height: 1.4;
+    }
+    .faq-q:hover { color: var(--teal); }
+    .faq-icon { flex-shrink: 0; font-size: 18px; color: var(--teal); transition: transform 0.25s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 4px 20px;
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── FINAL CTA ─────────────────────────────── */
+    #final {
+      background: var(--gray-50);
+      text-align: center;
+      padding: 40px 24px;
+    }
+    #final .section-title { color: var(--navy-deeper); }
+    .final-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      justify-content: center;
+      margin-bottom: 36px;
+    }
+    .final-meta span { font-size: 14px; color: rgba(255,255,255,0.5); }
+    .final-meta span::before { content: '·'; margin-right: 20px; color: var(--teal-light); }
+    .final-meta span:first-child::before { display: none; }
+
+    /* ── FOOTER ────────────────────────────────── */
+    footer {
+      background: var(--navy-deeper);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px;
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: underline; }
+    footer a:hover { color: var(--teal-light); }
+
+    /* ── RESPONSIVE ────────────────────────────── */
+    @media(min-width: 640px) {
+      .fit-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 240px 1fr; }
+      .about-img-wrap { max-width: 100%; }
+      .info-boxes { grid-template-columns: 1fr 1fr; }
+      .includes-grid { grid-template-columns: 1fr 1fr; }
+      .includes-grid .include-item:last-child:nth-child(odd) { grid-column: 1 / span 2; max-width: calc(50% - 6px); margin-left: auto; margin-right: auto; }
+    }
+    @media(max-width: 639px) {
+      section { padding: 44px 20px; }
+
+      /* Nav */
+      .nav { padding: 10px 16px; }
+      .logo-main { font-size: 13px; }
+      .logo-sub { font-size: 9px; }
+      .btn-nav { padding: 7px 14px; font-size: 12px; }
+
+      /* Hero */
+      #hero { grid-template-columns: 1fr; background: #ffffff; }
+      .hero-photo-col { order: -1; height: 320px; }
+      .hero-photo-col::before { background: linear-gradient(to bottom, transparent 45%, #ffffff 100%); }
+      .hero-inner { padding: 28px 24px 52px; align-items: center; text-align: center; background: #ffffff; }
+      .hero-inner .hero-tag { color: var(--teal); background: rgba(109,148,136,0.12); }
+      .hero-inner .hero-brand { color: var(--navy-deeper); }
+      .hero-inner .hero-title { color: var(--navy-dark); }
+      .hero-inner .hero-sub { color: var(--gray-600); }
+      .hero-inner .hero-meta span { color: var(--gray-600); }
+      .hero-meta { justify-content: center; }
+      .hero-inner .btn-note { color: var(--gray-500); }
+      .hero-brand { font-size: clamp(46px, 13vw, 64px); }
+      .hero-meta { gap: 6px 16px; }
+
+      /* Schedule table: hide KW column to fit 3 columns on screen */
+      .schedule-table { min-width: 0; font-size: 13px; }
+      .schedule-table .week-period { display: none; }
+      .schedule-table th:nth-child(2) { display: none; }
+      .schedule-table td { padding: 10px 12px; }
+      .schedule-table th { padding: 9px 12px; }
+
+      /* About photo on mobile – portrait, centered, not too large */
+      .about-img-wrap { aspect-ratio: 3/4; max-width: 200px; margin-left: auto; margin-right: auto; }
+
+      /* Price card */
+      .price-card { padding: 28px 20px; }
+      .price-amount { font-size: 42px; }
+      .price-pills { gap: 6px; }
+      .price-pill { font-size: 12px; padding: 6px 12px; }
+
+      /* Modules */
+      .module-card { gap: 14px; padding: 18px; }
+
+      /* Info boxes single column */
+      .info-boxes { grid-template-columns: 1fr; }
+
+      /* Includes */
+      .includes-grid { grid-template-columns: 1fr; }
+
+      /* FAQ */
+      .faq-q { font-size: 15px; }
+
+      /* Early note */
+      .early-note { padding: 22px 20px; font-size: 14px; }
+
+      /* Final meta – 2 items side by side on mobile */
+      .final-meta { flex-direction: row; gap: 4px 12px; }
+      .final-meta span { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="home.html" class="nav-logo">
+    <span class="logo-main">Trading meets Nervensystem</span>
+    <span class="logo-sub">by Kristina</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">Begleiteter Onlinekurs</span>
+    <div class="hero-brand">Trader's Edge</div>
+    <div class="hero-underline"></div>
+    <h1 class="hero-title">Tradingplan einhalten,<br>auch wenn es eng wird.</h1>
+    <p class="hero-sub">Begleiteter Onlinekurs für Trader, deren Strategie funktioniert und die sich im entscheidenden Moment trotzdem nicht daran halten.</p>
+    <div class="hero-meta">
+      <span>Start am 23. November</span>
+      <span>Sechs Plätze</span>
+      <span>489 €</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:stretch;gap:10px;">
+      <a href="#price" class="btn-primary">Platz sichern</a>
+      <p class="btn-note">Buchung gerade per DM auf Insta.</p>
+    </div>
+  </div>
+  <div class="hero-photo-col">
+    <img src="Titelbild_Kurs.jpg" alt="Kristina Gibert">
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <span class="section-tag">Das Problem</span>
+    <div class="quote-block">
+      <p>„Ich weiß genau, was ich tun soll und tue es trotzdem nicht"</p>
+    </div>
+    <p class="body-text">Diesen Satz höre ich von Tradern immer wieder und vielleicht kennst du ihn auch von dir. Im Demo läuft es aber am Live-Markt machst du Dinge, die deinem Tradingplan widersprechen. Du verschiebst den Stop, du gehst größer rein als geplant, du nimmst den Gewinn zu früh mit, oder nach einem Verlust sitzt du schon wieder im nächsten Trade.</p>
+    <p class="problem-lead">Was dich das kostet, steht selten nur auf dem Konto. Vielleicht kennst du das:</p>
+    <ul class="problem-list">
+      <li>Der Handelstag ist vorbei, du hast eigentlich frei und trotzdem läuft jeder Trade im Kopf noch einmal ab.</li>
+      <li>„Meine Strategie ist im Backtesting profitabel, warum klappt es dann bei mir nicht?"</li>
+      <li>Du stellst immer öfter alles komplett in Frage.</li>
+      <li>Die Frustration wächst mit jedem roten Tag ein Stück weiter und du kannst kaum noch abschalten.</li>
+      <li>Dein Selbstwert steigt und fällt mit der Zahl in deiner P&amp;L.</li>
+    </ul>
+    <p class="body-text">Wenn du dich darin wiedererkennst, bist du hier genau richtig.</p>
+  </div>
+</section>
+
+
+<!-- METHOD -->
+<section id="method">
+  <div class="container">
+    <span class="section-tag">Der Kursinhalt</span>
+    <h2 class="section-title">Für diesen Kurs habe ich eine eigene Methode aufgebaut.</h2>
+    <p class="method-intro">Diese Methode besteht aus fünf Schritten, die aufeinander aufbauen und zusammen das Wort TRADE ergeben. Davor steht ein kurzes Einführungsmodul.</p>
+    <div class="modules">
+      <div class="module-card intro-card">
+        <div class="module-letter">0</div>
+        <div>
+          <div class="module-title">Einführungsmodul</div>
+          <div class="module-desc">Willkommen, das Organisatorische und der Rahmen, in dem wir arbeiten.</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-letter">T</div>
+        <div>
+          <div class="module-title">T wie Trigger erkennen</div>
+          <div class="module-desc">Du verstehst, wie dein Nervensystem im Trading arbeitet und lernst deine Trigger zu erkennen, bevor sie dein Verhalten steuern.</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-letter">R</div>
+        <div>
+          <div class="module-title">R wie Regulieren</div>
+          <div class="module-desc">Du bekommst Werkzeuge, mit denen du dich mitten im Handelstag wieder herunterholst und lernst, mit starken Emotionen umzugehen, ohne sie zu unterdrücken oder daraus reaktiv zu handeln.</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-letter">A</div>
+        <div>
+          <div class="module-title">A wie Aufdecken</div>
+          <div class="module-desc">Du findest heraus, welche Überzeugungen und Muster unter deinem Verhalten liegen.</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-letter">D</div>
+        <div>
+          <div class="module-title">D wie Durchbrechen</div>
+          <div class="module-desc">Hier zeige ich dir Ansätze, mit denen du an diesen Mustern selbstständig arbeiten kannst.</div>
+        </div>
+      </div>
+      <div class="module-card">
+        <div class="module-letter">E</div>
+        <div>
+          <div class="module-title">E wie Etablieren</div>
+          <div class="module-desc">Du fängst an, deine neue Identität als Trader zu etablieren.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="container">
+    <span class="section-tag">Ablauf</span>
+    <h2 class="section-title">Zehn Wochen, fünf Module, ein fester Rhythmus</h2>
+    <p class="schedule-text">Jedes Modul geht über zwei Wochen. In der ersten Woche schaust du die Videos, am Wochenende treffen wir uns zum Live-Call, den genauen Termin stimmen wir in der Gruppe ab. Die zweite Woche ist deine Integrationswoche: Nichts Neues kommt dazu, du nimmst das Gelernte mit an den Chart oder vertiefst die Übungen für dich. Danach startet das nächste Modul. Der Kurs läuft insgesamt zehn Wochen, dazu kommt eine Weihnachtspause vom 21.12. bis 03.01.</p>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Woche</th>
+            <th>Zeitraum</th>
+            <th>Inhalt</th>
+            <th>Live-Call</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="week-num">1</td>
+            <td class="week-period">KW 48</td>
+            <td><strong>T: Trigger erkennen</strong></td>
+            <td class="call-date">28. oder 29.11.</td>
+          </tr>
+          <tr>
+            <td class="week-num">2</td>
+            <td class="week-period">KW 49</td>
+            <td class="integration">Integration</td>
+            <td class="no-call">–</td>
+          </tr>
+          <tr>
+            <td class="week-num">3</td>
+            <td class="week-period">KW 50</td>
+            <td><strong>R: Regulieren</strong></td>
+            <td class="call-date">12. oder 13.12.</td>
+          </tr>
+          <tr>
+            <td class="week-num">4</td>
+            <td class="week-period">KW 51</td>
+            <td class="integration">Integration</td>
+            <td class="no-call">–</td>
+          </tr>
+          <tr class="xmas-row">
+            <td colspan="4">🎄 Weihnachtspause · 21. Dezember bis 3. Januar</td>
+          </tr>
+          <tr>
+            <td class="week-num">5</td>
+            <td class="week-period">KW 1</td>
+            <td><strong>A: Aufdecken</strong></td>
+            <td class="call-date">9. oder 10.01.</td>
+          </tr>
+          <tr>
+            <td class="week-num">6</td>
+            <td class="week-period">KW 2</td>
+            <td class="integration">Integration</td>
+            <td class="no-call">–</td>
+          </tr>
+          <tr>
+            <td class="week-num">7</td>
+            <td class="week-period">KW 3</td>
+            <td><strong>D: Durchbrechen</strong></td>
+            <td class="call-date">23. oder 24.01.</td>
+          </tr>
+          <tr>
+            <td class="week-num">8</td>
+            <td class="week-period">KW 4</td>
+            <td class="integration">Integration</td>
+            <td class="no-call">–</td>
+          </tr>
+          <tr>
+            <td class="week-num">9</td>
+            <td class="week-period">KW 5</td>
+            <td><strong>E: Etablieren</strong></td>
+            <td class="call-date">6. oder 7.02.</td>
+          </tr>
+          <tr>
+            <td class="week-num">10</td>
+            <td class="week-period">KW 6</td>
+            <td class="integration">Integration</td>
+            <td class="no-call">–</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-boxes">
+      <div class="info-box">
+        <div class="info-box-title">Zeitaufwand</div>
+        <p>Plane in der ersten Modulwoche ungefähr zwei Stunden ein, eine Stunde für die Videos und eine Stunde für den Live-Call. In der Integrationswoche baust du das Erlernte in dein Trading ein und machst in den Modulen A, D und E anstehende Übungen. Das beansprucht weniger als zwei Stunden.</p>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Die Live-Calls</div>
+        <p>Die Calls finden am Wochenende statt. Weil es eine kleine Gruppe ist, bekommt jeder Teilnehmer Raum. Ich zeichne die Calls bewusst nicht auf, damit sich jeder traut, live mit seinem Thema zu sprechen. Falls du einmal nicht dabei sein kannst, bekommst du von mir eine Zusammenfassung als Sprachnachricht.</p>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Zwischen den Calls</div>
+        <p>In diesen zehn Wochen bin ich für dich über WhatsApp erreichbar.</p>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Dein Zugang</div>
+        <p>Du hast 100 Tage Zugang zum Kurs. Diese Begrenzung ist Absicht, denn der Kurs wirkt durch Umsetzung und ein Zugang ohne Ende führt bei den meisten dazu, dass die Inhalte irgendwann liegen bleiben.</p>
+      </div>
+    </div>
+    <div class="early-note">
+      <strong>Die erste Runde ist besonders.</strong>
+      Sechs Plätze, persönliche Begleitung auf diesem Niveau und ein Preis, der in der nächsten Runde steigen wird. Wer jetzt dabei ist, bekommt Konditionen, die es so nicht mehr geben wird.
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <span class="section-tag">Stimmen</span>
+    <h2 class="section-title">Die erste Gruppe bekommt, was später so nicht mehr möglich ist</h2>
+    <div class="context-box">
+      <p>Trader's Edge startet im November zum ersten Mal als begleiteter Onlinekurs. Die Inhalte kommen aus meiner Einzelarbeit mit Tradern und aus meinem eigenen Trading, in dieser Form gebe ich sie zum ersten Mal an eine Gruppe weiter. Es gibt noch keine Stimmen von Teilnehmern, die ich dir zeigen könnte. Und du bekommst bei sechs Plätzen so viel Aufmerksamkeit von mir, wie es später nicht mehr geben wird.</p>
+    </div>
+    <p class="testimonials-label">Stimmen aus meinem 1:1-Coaching:</p>
+    <div class="testimonials">
+      <div class="tcard tcard-gray">
+        <div class="tcard-name">Markus</div>
+        <div class="tcard-headline">„Gefühlt größere Fortschritte in 6 Wochen als in 3 Jahren davor"</div>
+        <div class="tcard-text">„Psyche im Trading? Wovon reden die alle? Das wird ganz sicher niemals mein Problem." Genau das dachte ich, als ich vor 3 Jahren mit dem Trading begann. Zumindest so lange, bis der Markt beschlossen hat, mir den ersten richtig üblen Drawdown zu verpassen. Das Ergebnis? Ich stand kurz davor, Trading offiziell als die teuerste Schnapsidee meines Lebens zu begraben. Und genau dann kam glücklicherweise Kristina in mein Trading-Leben. <em>Ich habe in den letzten 6 Wochen gefühlt größere Fortschritte gemacht als in den ganzen 3 Jahren zuvor.</em> Absolute Empfehlung!</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-name">Luca</div>
+        <div class="tcard-headline">„nicht nur als Trader, sondern auch persönlich sehr gewachsen zu sein."</div>
+        <div class="tcard-text">Die Zusammenarbeit mit Kristina war für mich eine unglaublich wertvolle und transformierende Erfahrung. Ich bin ursprünglich mit dem Wunsch gestartet, meine Herausforderungen im Trading besser zu verstehen und aufzulösen. … Besonders wertvoll war für mich, meine eigenen Muster und emotionalen Reaktionen bewusster wahrzunehmen und dadurch einen ganz anderen Umgang mit Themen wie Angst, Unsicherheit, Kontrolle und dem Umgang mit Fehlern zu entwickeln. … <em>Ich merke die Veränderungen auch im Alltag und habe das Gefühl, nicht nur als Trader, sondern auch persönlich sehr gewachsen zu sein.</em></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-name">Jana</div>
+        <div class="tcard-headline">„Mein Trading ist viel entspannter und ich halte meinen Plan auch in der Losing Streak"</div>
+        <div class="tcard-text">Ich hatte inzwischen 7 Coaching Sessions bei Kristina und der Fortschritt, den ich gemacht habe, ist einfach nur phänomenal! <em>Nicht nur, dass mein gesamtes Trading viel entspannter und ruhiger geworden ist, ich kann inzwischen selbst eine längere Losing Streak gut abfangen und weiter an meinem Plan festhalten!</em> Nach jeder Coaching Session merke ich eine spürbare Verbesserung!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section id="forwhom">
+  <div class="container-wide">
+    <span class="section-tag" style="display:block;text-align:center;">Passt das zu dir?</span>
+    <h2 class="section-title" style="max-width:540px;margin-left:auto;margin-right:auto;">Ob der Kurs zu dir passt</h2>
+    <div class="fit-grid">
+      <div class="fit-card yes">
+        <div class="fit-title">Der Kurs passt zu dir, wenn</div>
+        <ul class="fit-list">
+          <li>du aktiv tradest und deine Strategie grundsätzlich funktioniert</li>
+          <li>deine Ergebnisse schwanken, weil dein Verhalten schwankt</li>
+          <li>du meistens schon weißt, was du falsch machst und es trotzdem tust</li>
+          <li>du bereit bist, dir ehrlich anzuschauen, was darunter liegt</li>
+          <li>du dir in einer Modulwoche ungefähr zwei Stunden nehmen kannst und bereit bist, neue Dinge umzusetzen</li>
+        </ul>
+      </div>
+      <div class="fit-card no">
+        <div class="fit-title">Der Kurs passt nicht zu dir, wenn</div>
+        <ul class="fit-list">
+          <li>du erwartest, dass sich etwas verändert, ohne dass du zwischen den Modulen etwas umsetzt</li>
+          <li>du eine Strategie oder Setups suchst</li>
+          <li>du Signale oder Einschätzungen zu Märkten erwartest</li>
+          <li>du noch gar nicht tradest und erst anfangen willst</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fit-note">Wenn du unsicher bist, ob du hineinpasst, schreib mir. Ich sage dir ehrlich, wenn etwas anderes gerade sinnvoller für dich ist.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <span class="section-tag">Über mich</span>
+    <h2 class="section-title">Wer dich durch diese zehn Wochen begleitet</h2>
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img src="Foto_Startseite_oben.jpg" alt="Kristina" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+      </div>
+      <div>
+        <p class="body-text">Ich bin Kristina, Coach und selbst Traderin. Ich habe bereits über 250 Menschen bei ihrer Entwicklung begleitet.</p>
+        <p class="body-text">All das, was bei Tradern aufkommt, kenne ich auch aus eigener Erfahrung. Ich habe mal mein Konto gedrittelt, habe früher viele Rachetrades gemacht, Emotionen unterdrückt, bis sie sich unkontrolliert immer wieder entladen haben. Ich habe das so lange gemacht, bis ich verstand, dass mein Nervensystem die Entscheidungen traf und ich begann, mich in der Tiefe mit meinen Mustern auseinanderzusetzen.</p>
+        <p class="body-text">Heute bringe ich meine Erfahrung als Traderin und meine Methoden als Coach in mein 1:1 Coaching und jetzt auch in den begleiteten Onlinekurs Trader's Edge zusammen. All das ist nicht nur Theorie, sondern Erprobtes aus dem Trading – denn ich weiß, wie es sich anfühlt, mittendrin zu stehen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section id="includes">
+  <div class="container">
+    <span class="section-tag">Das bekommst du</span>
+    <h2 class="section-title">Alles, was enthalten ist</h2>
+    <div class="includes-grid">
+      <div class="include-item">
+        <div class="include-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+        <div>
+          <div class="include-title">Fünf Module als Video</div>
+          <div class="include-desc">Jedes Modul besteht aus mehreren Videos zwischen fünf und zwanzig Minuten und kommt auf etwa eine Stunde.</div>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <div>
+          <div class="include-title">Fünf Live-Calls</div>
+          <div class="include-desc">Mit mir, in einer Gruppe von maximal sechs Leuten. Jeder bekommt Raum.</div>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <div>
+          <div class="include-title">Audios, Übungen & Methoden</div>
+          <div class="include-desc">Damit du an deinen Mustern selbstständig weiterarbeiten kannst. Inkl. Nervensystem-Selbsttest.</div>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
+        <div>
+          <div class="include-title">WhatsApp Begleitung</div>
+          <div class="include-desc">Direkter Draht zu mir zwischen den Calls, zehn Wochen lang.</div>
+        </div>
+      </div>
+      <div class="include-item">
+        <div class="include-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg></div>
+        <div>
+          <div class="include-title">100 Tage Zugang</div>
+          <div class="include-desc">Zu allen Videos und Inhalten. Übungen und Audios gehören dir dauerhaft.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price">
+  <div class="container">
+    <span class="section-tag">Deine Teilnahme</span>
+    <div class="price-card">
+      <div class="price-label">Trader's Edge · Begleiteter Onlinekurs</div>
+      <div class="price-amount">489 <span>€</span></div>
+      <div class="price-pills">
+        <span class="price-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Start 23. November</span>
+        <span class="price-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Sechs Plätze</span>
+        <span class="price-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10 Wochen</span>
+      </div>
+      <a href="#" class="btn-primary" style="width:100%;">Platz sichern</a>
+      <p class="btn-note-dark">Buchung gerade per DM auf Insta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-tag">Häufige Fragen</span>
+    <h2 class="section-title">Noch offene Fragen?</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Brauche ich Vorwissen?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Nein, brauchst du nicht. Ich erkläre alles, was du wissen musst, direkt im Kurs. Die Konzepte aus Nervensystemarbeit und Coaching sind so aufgebaut, dass du sie ohne Vorkenntnisse verstehst und direkt beim Traden anwenden kannst.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ich bin mir nicht sicher, ob das etwas für mich ist.
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Schreib mir eine DM auf Insta oder per Mail und erzähl mir kurz, woran es bei dir gerade hängt. Ich sage dir ehrlich, ob der Kurs der richtige Weg dafür ist.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Wie viel Zeit brauche ich wirklich?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">In der ersten Woche eines Moduls ungefähr zwei Stunden, also eine Stunde für die Videos und eine Stunde für den Live-Call. In der Integrationswoche kommt nichts Neues dazu, aber dort baust du das Erlernte in dein Trading ein und machst in den Modulen A, D und E anstehende Übungen. Das beansprucht in der Regel weniger als zwei Stunden.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Was ist, wenn ich bei einem Live-Call nicht kann?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Schreib mir kurz, dann bekommst du von mir eine Zusammenfassung als Sprachnachricht. Die Termine stimmen wir in der Gruppe ab, deshalb passt es meistens für alle.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Was passiert nach den 100 Tagen?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Danach endet dein Zugang zu den Videos. Die Übungen und Audios hast du heruntergeladen und behältst sie.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Kann ich in Raten zahlen?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Ja, in bis zu drei Raten.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ist das eine Therapie?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Nein. Ich arbeite coachend an deinem Trading und ersetze keine therapeutische Begleitung.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final">
+  <div class="container" style="text-align:center;">
+    <h2 style="max-width:580px;margin:0 auto 24px;color:var(--navy-dark);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:750;line-height:1.15;letter-spacing:-0.02em;text-wrap:balance;">Dein Tradingplan steht schon.<br>Es geht nun darum, dass du ihn auch einhältst.</h2>
+    <div style="display:inline-flex;flex-direction:column;align-items:stretch;">
+      <a href="#price" class="btn-primary" style="text-align:center;">Platz sichern</a>
+      <p class="btn-note" style="color:var(--gray-600);">Buchung gerade per DM auf Insta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    © 2026 tradingmeetsnervensystem.de · Alle Rechte vorbehalten<br>
+    <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+  </p>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
+</script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
